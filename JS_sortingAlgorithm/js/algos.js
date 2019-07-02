@@ -75,10 +75,12 @@ function selectionsort() {
         var k = i; //  storing the index of minimum element
 
         for (var j = i + 1; j < csvData.length; j++) {
-            if (csvData[k] > csvData[j]) {
-               swap(k,j) ; // updating the index of minimum element
+            if(isLess(j,k)){
+                k=j;
             }
+
         }
+        swap(i,k)
     }
 }
 
