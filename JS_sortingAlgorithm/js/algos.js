@@ -58,7 +58,6 @@ function isLess(i, j) {
 
 
 function insertsort() {
-    console.log("insertsort - implement me !");
 for( var i = 1 ;i< csvData.length; i++){
     for ( var k = i; k > 0 ; k-- ){
         if (isLess(k,k-1)){
@@ -69,7 +68,6 @@ for( var i = 1 ;i< csvData.length; i++){
 }
 
 function selectionsort() {
-    console.log("selectionsort - implement me !");
     for (var i = 0; i < csvData.length; i++) {
 
         var k = i; //  storing the index of minimum element
@@ -78,7 +76,6 @@ function selectionsort() {
             if(isLess(j,k)){
                 k=j;
             }
-
         }
         swap(i,k)
     }
@@ -86,6 +83,18 @@ function selectionsort() {
 
 function bubblesort() {
     console.log("bubblesort - implement me !");
+    for(var i =0; i <csvData.length; i++){
+        var swapped = false;
+        for (var j = csvData.length-1; j > i; j--){
+            if (isLess(j,j-1)){
+                swap(j,j-1);
+                swapped = true;
+            }
+        }
+    if(!swapped){
+            break;
+    }
+    }
 }
 
 function shellsort() {
