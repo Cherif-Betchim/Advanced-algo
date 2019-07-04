@@ -13,13 +13,13 @@ function distanceFromGrenoble(city) {
     var R = 6371e3; // metres
     var phi1 = lat1.toRadians();
     var phi2 = lat2.toRadians();
-    var deltaPhi = (lat2-lat1).toRadians();
-    var DELTAdelta = (lon2-lon1).toRadians();
+    var deltaPhi = (lat2 - lat1).toRadians();
+    var DELTAdelta = (lon2 - lon1).toRadians();
 
-    var a = Math.sin(deltaPhi/2) * Math.sin(deltaPhi/2) +
+    var a = Math.sin(deltaPhi / 2) * Math.sin(deltaPhi / 2) +
         Math.cos(phi1) * Math.cos(phi2) *
-        Math.sin(DELTAdelta/2) * Math.sin(DELTAdelta/2);
-    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+        Math.sin(DELTAdelta / 2) * Math.sin(DELTAdelta / 2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
     var d = R * c;
     d = d / 1000;
@@ -40,8 +40,8 @@ function swap(i, j) {
     csvData[j] = t;
 
 
-
 }
+
 //
 // // Returns true if city with index i in csvData is closer to Grenoble than city with index j
 // // i is the index of the first city
@@ -49,21 +49,21 @@ function swap(i, j) {
 function isLess(i, j) {
     displayBuffer.push(['compare', i, j]); // Do not delete this line (for display)
     console.log("isLess - implement me !");
-    if (csvData[i].dist < csvData[j].dist){
+    if (csvData[i].dist < csvData[j].dist) {
         return true
-    }else {
+    } else {
         return false
     }
 }
 
 
 function insertsort() {
-for( var i = 1 ;i< csvData.length; i++){
-    for ( var k = i; k > 0 ; k-- ){
-        if (isLess(k,k-1)){
-            swap(k,k-1)
+    for (var i = 1; i < csvData.length; i++) {
+        for (var k = i; k > 0; k--) {
+            if (isLess(k, k - 1)) {
+                swap(k, k - 1)
+            }
         }
-    }
     }
 }
 
@@ -73,32 +73,62 @@ function selectionsort() {
         var k = i; //  storing the index of minimum element
 
         for (var j = i + 1; j < csvData.length; j++) {
-            if(isLess(j,k)){
-                k=j;
+            if (isLess(j, k)) {
+                k = j;
             }
         }
-        swap(i,k)
+        swap(i, k)
     }
 }
 
 function bubblesort() {
     console.log("bubblesort - implement me !");
-    for(var i =0; i <csvData.length; i++){
+    for (var i = 0; i < csvData.length; i++) {
         var swapped = false;
-        for (var j = csvData.length-1; j > i; j--){
-            if (isLess(j,j-1)){
-                swap(j,j-1);
+        for (var j = csvData.length - 1; j > i; j--) {
+            if (isLess(j, j - 1)) {
+                swap(j, j - 1);
                 swapped = true;
             }
         }
-    if(!swapped){
+        if (!swapped) {
             break;
-    }
+        }
     }
 }
 
 function shellsort() {
     console.log("shellsort - implement me !");
+    var h = 1;
+    while (h < csvData.length) {
+        h = 3 * h + 1;
+    }
+   // console.log("============================================================")
+   // console.log("================== Debut boucle while sur h ================")
+   // console.log("============================================================")
+    while (h > 0) {
+
+        h = Math.floor(h / 3);
+        console.log("h = "+h);
+
+    //    console.log("====================================");
+    //    console.log("========= Debut Boucle sur t =======");
+        for (var t = 0; t < h; t++) {
+       //     console.log("== Debut Tri par insertion ==");
+       //     console.log("t = ",t);
+
+            for (var k = t+h; k < csvData.length; k += h) {
+        //        console.log("Boucle no 1 TI. k = "+k)
+                for (var j = k; j > t ; j=j-h) {
+                    if(isLess(j, j - h)) {
+                        console.log("Boucle no2 TI. j =" + j);
+                        swap(j, j - h);
+                    }
+                }
+            }
+
+        }
+    }
 }
 
 function mergesort() {
